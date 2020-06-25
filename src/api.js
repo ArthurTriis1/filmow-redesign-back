@@ -1,8 +1,9 @@
 
 const express = require("express");
 const app = express();
-const serverless = require('serverless-http')
-const Parser = require('rss-parser')
+const serverless = require('serverless-http');
+const Parser = require('rss-parser');
+const cors = require('cors');
 
 const router = express.Router();
 
@@ -10,6 +11,7 @@ const parser = new Parser()
 
 app.use(express.static("public"));
 app.use(express.json());
+app.use(cors());
 
 router.get("/news", async (req, res) => {
     const { items } = await parser.parseURL('https://filmow.com/noticias/rss/');
